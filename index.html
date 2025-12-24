@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You, Bibi Mai2 💗</title>
+<p>A Little Internet Spot Just For You</p>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap" rel="stylesheet">
+
+<style>
+
+/* Audio player */
+audio {
+  width: 80%;
+  max-width: 400px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 25px;
+  background: #ffe0f0;
+  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
+  padding: 10px;
+}
+
+/* Body & Typography */
+body{
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #ffd6e8, #ffffff);
+  overflow-x: hidden;
+  text-align: center;
+  color: #b03060;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3em;
+  color: #ff3366;
+  text-shadow: 2px 2px 4px #ffc1dd;
+  margin-top: 60px;
+}
+
+h2 {
+  font-family: 'Dancing Script', cursive;
+  color: #ff3366;
+}
+
+.love-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5em;
+  color: #b03060;
+  line-height: 1.5;
+}
+
+.card-text {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1em;
+  color: #b03060;
+  line-height: 1;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 20px;
+  max-width: 600px;
+  box-shadow: 0 10px 25px rgba(255,105,180,0.25);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(255,105,180,0.35);
+}
+
+.card p {
+  display: none;
+  margin-top: 10px;
+}
+
+.card.open p {
+  display: block;
+}
+
+/* ===== POLAROID GALLERY (ADDED HERE) ===== */
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: nowrap;
+}
+
+.gallery img {
+  width: 220px;
+  background: white;
+  padding: 12px 12px 35px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+/* Footer */
+footer {
+  margin: 80px 0 40px;
+  font-size: 1.2em;
+}
+
+/* ===== MOBILE VIEW ===== */
+@media screen and (max-width: 500px) {
+  h1 {
+    font-size: 2em;
+    margin-top: 40px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin-top: 30px;
+  }
+
+  .card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .gallery {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gallery img {
+    width: 90%;
+    max-width: 300px;
+  }
+}
+
+/* Hearts background */
+.background-hearts .heart {
+  position: absolute;
+  bottom: -20px;
+  width: 20px;
+  height: 20px;
+  background: #ff65a3;
+  transform: rotate(-45deg);
+  opacity: 0.7;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(-45deg); opacity: 0.7; }
+  100% { transform: translateY(-120vh) rotate(-45deg); opacity: 0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="background-hearts"></div>
+
+<h1>For You, Bibi Mai2 💗</h1>
+<p>"I found the one my heart loves. I held him and would not let him go." — Song of Solomon 3:4</p>
+
+<section>
+  <h2>💌 My Special Letter For you my Love</h2>
+  <div class="card love-letter">
+    <strong>Click for a message 💖</strong>
+    <p class="card-text" style="margin-top: 20px;">
+      Mahal Ko Mai2, Thank you po sa tanan and happy Christmas 🎄 hehehe <br>
+      sorry wala pa gyud koy ma tag na gift, kani pa gyud akong mahatag hehe 😘 mwahh
+    </p>
+  </div>
+</section>
+
+<section>
+  <h2>📸 Our Memories</h2>
+  <div class="gallery">
+    <img src="photo1.jpg" alt="hey">
+    <img src="photo2.jpg" alt="yah">
+    <img src="photo3.jpg" alt="fs">
+  </div>
+</section>
+
+<section>
+  <h2>📅 Our Journey Together</h2>
+  <div class="timeline-container" style="max-width:500px;margin:30px auto;position:relative;">
+    <div class="timeline-line" style="height:6px;background:#ff69b4;border-radius:3px;"></div>
+    <div id="timeline-months" style="margin-top:10px;font-size:1.2em;font-weight:bold;color:#b03060;"></div>
+  </div>
+</section>
+
+<section>
+  <h2>🎵 A song that reminds me of you</h2>
+  <audio id="specialSong" controls>
+    <source src="love-song.mp3" type="audio/mpeg">
+  </audio>
+</section>
+
+<footer>Forever yours 💕</footer>
+
+<script>
+// Card toggle
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('open'));
+});
+
+// Calculate months
+function calculateMonths() {
+  const start = new Date(2025, 2, 14);
+  const today = new Date();
+  let months = (today.getFullYear() - start.getFullYear()) * 12;
+  months += today.getMonth() - start.getMonth();
+  if (today.getDate() < start.getDate()) months--;
+  return months >= 0 ? months : 0;
+}
+
+document.getElementById("timeline-months").textContent =
+  `We are together for ${calculateMonths()} month${calculateMonths() === 1 ? '' : 's'} 💖`;
+
+// Floating hearts
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+
+  const size = Math.random() * 15 + 10;
+  heart.style.width = size + "px";
+  heart.style.height = size + "px";
+  heart.style.left = Math.random() * 100 + "vw";
+
+  const colors = ["#ff7eb9", "#ff65a3", "#ff9acb", "#ffc1dd"];
+  heart.style.background = colors[Math.floor(Math.random() * colors.length)];
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+  document.querySelector(".background-hearts").appendChild(heart);
+  setTimeout(() => heart.remove(), 10000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
