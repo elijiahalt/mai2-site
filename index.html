@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You, Bibi Mai2 💗</title>
@@ -168,14 +168,15 @@ footer {
 <body>
 
 <div class="background-hearts"></div>
+<div class="rose-container"></div>
 
 <h1>For You, Bibi Mai2 💗</h1>
 <p>"I found the one my heart loves. I held him and would not let him go." — Song of Solomon 3:4</p>
 
 <section>
   <h2>💌 My Special Letter For you my Love</h2>
-  <div class="card love-letter">
-    <strong>Click for a message 💖</strong>
+    <div class="card love-letter">
+      <strong>Click for a message 💖</strong>
     <p class="card-text" style="margin-top: 20px;">
       Mahal Ko Mai2, Thank you po sa tanan and happy Christmas 🎄 hehehe <br>
       sorry wala pa gyud koy ma tag na gift, kani pa gyud akong mahatag hehe 😘 mwahh
@@ -216,17 +217,42 @@ document.querySelectorAll('.card').forEach(card => {
 });
 
 // Calculate months
-function calculateMonths() {
-  const start = new Date(2025, 2, 14);
-  const today = new Date();
-  let months = (today.getFullYear() - start.getFullYear()) * 12;
-  months += today.getMonth() - start.getMonth();
-  if (today.getDate() < start.getDate()) months--;
-  return months >= 0 ? months : 0;
-}
+function updateTimeline() {
+  const start = new Date(2025, 2, 14, 0, 0, 0); // March 14, 2025
+  const now = new Date();
+
+  if (now < start) {
+    document.getElementById("timeline-months").textContent =
+      "Our journey is about to begin 💗";
+    return;
+  }
+
+  let months =
+    (now.getFullYear() - start.getFullYear()) * 12 +
+    (now.getMonth() - start.getMonth());
+
+  let days = now.getDate() - start.getDate();
+
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+
+  // Time difference
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
 
 document.getElementById("timeline-months").textContent =
-  `We are together for ${calculateMonths()} month${calculateMonths() === 1 ? '' : 's'} 💖`;
+    `We are together for ${months} month${months !== 1 ? "s" : ""}, ` +
+    `${days} day${days !== 1 ? "s" : ""}  ` +
+    `, ${hours}h, ${minutes}m, and ${seconds}s`;
+}
+
+// Update every second
+updateTimeline();
+setInterval(updateTimeline, 1000);
 
 // Floating hearts
 function createHeart() {
@@ -248,6 +274,5 @@ function createHeart() {
 
 setInterval(createHeart, 300);
 </script>
-
 </body>
 </html>
