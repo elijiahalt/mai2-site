@@ -1,113 +1,425 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You, Bibi Mai2 💗</title>
-<p>A Little Internet Spot Just For You</p>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Valentine Letter</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> <!-- Added from repo for portrait font -->
 
 <style>
-
-/* Audio player */
-audio {
-  width: 80%;
-  max-width: 400px;
-  margin: 20px auto;
-  display: block;
-  border-radius: 25px;
-  background: #ffe0f0;
-  box-shadow: 0 4px 15px rgba(255,105,180,0.3);
-  padding: 10px;
+:root{
+  --heart-offset: 28px;
+  --portrait-font-vw: 2vw; /* Increased for thicker text */
+  --portrait-font-family: 'Inter', sans-serif; /* From repo */
+  --portrait-brightness: 1.1; /* From repo style; adjust for vividness */
+  --portrait-grayscale: 0; /* 1 for B&W */
+  --portrait-invert: 0; /* 1 to flip colors */
+  --portrait-contrast: 120%; /* Existing enhancements */
+  --portrait-saturate: 130%;
 }
 
-/* Body & Typography */
+*{box-sizing:border-box}
 body{
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #ffd6e8, #ffffff);
-  overflow-x: hidden;
-  text-align: center;
-  color: #b03060;
-  position: relative;
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(to bottom, #ffb6d9, #ffcce6, #ffe6f2);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  position:relative;
+}
+
+/* Intro letter */
+#envelope {
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9;
+  background: rgba(0,0,0,0.18);
+  cursor:pointer;
+}
+
+.letter {
+  width:min(86vw,540px);
+  height:min(56vw,340px);
+  max-height:70vh;
+  background:#fff;
+  border-radius:10px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  overflow:hidden;
+  padding:20px;
+}
+
+.letter h3{ margin:0; font-size:18px; color:#b54677; }
+.letter p{ margin-top:12px; font-size:14px; line-height:1.3; color:#333; }
+.letter .seal{ margin-top:18px; text-align:center; font-weight:600; color:#b54677; font-size:16px; }
+
+/* MAIN scene (hidden initially) */
+#main {
+  position:fixed;
+  inset:0;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:opacity .6s ease, transform .6s ease;
+  opacity:0;
+  transform: scale(.98);
+  pointer-events:none;
+}
+
+#main.visible{
+  opacity:1;
+  transform: scale(1);
+  pointer-events:auto;
+}
+
+/* Top message with pulse animation */
+.message{
+  position:fixed;
+  top:18px;
+  width:100%;
+  text-align:center;
+  font-family:'Great Vibes',cursive;
+  font-size:38px;
+  color:white;
+  text-shadow: 0 0 18px rgba(255,255,255,0.9);
+  z-index:7;
+  pointer-events:none;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+/* clouds */
+.cloud {
+  position: fixed;
+  width: 260px;
+  height: 140px;
+  background: radial-gradient(circle at 30% 30%, #ffffff 55%, rgba(255,255,255,0.45));
+  border-radius: 100px;
+  opacity: 0.45;
+  filter: blur(10px);
   z-index: 1;
+  pointer-events: none;
+
+  animation: cloudWave 8s ease-in-out infinite; /* slower + dreamy */
+  will-change: transform;
 }
 
-h1 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 3em;
-  color: #ff3366;
-  text-shadow: 2px 2px 4px #ffc1dd;
-  margin-top: 60px;
+@keyframes cloudWave {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+  25% {
+    transform: translateX(20px) translateY(-20px);
+  }
+  50% {
+    transform: translateX(-20px) translateY(15px);
+  }
+  75% {
+    transform: translateX(15px) translateY(-10px);
+  }
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
 }
 
-h2 {
-  font-family: 'Dancing Script', cursive;
-  color: #ff3366;
+.cloud.left {
+  left: -80px;
+  top: 20%;
+  animation-delay: 0s;
 }
 
-.love-letter {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5em;
-  color: #b03060;
-  line-height: 1.5;
+.cloud.right {
+  right: -80px;
+  top: 60%;
+  animation-delay: 8s;
 }
 
-.card-text {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1em;
-  color: #b03060;
-  line-height: 1;
+/* sparkling stars */
+.star {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #fff5fa;
+  border-radius: 50%;
+  opacity: 1;
+  animation: twinkle 2s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+  
+/* petals behind portrait (more petals, varied sizes/colors) */
+.petal{
+  position:fixed;
+  width:var(--size, 14px); height:var(--size, 14px);
+  background: linear-gradient(120deg, var(--color-start, #ffd1e2), var(--color-end, #ffc0df));
+  border-radius:60% 40% 60% 40%;
+  opacity:0.7;
+  z-index:1;
+  filter: blur(.2px);
+  animation: fall linear infinite;
+  pointer-events:none;
+}
+@keyframes fall{
+  0%{ transform: translateY(var(--startY,-10vh)) translateX(0) rotate(0deg); opacity:1; }
+  50%{ transform: translateY(50vh) translateX(var(--sway,30px)) rotate(180deg); }
+  100%{ transform: translateY(110vh) translateX(calc(var(--sway,-30px) * -1)) rotate(360deg); opacity:0.6; }
 }
 
-/* Cards */
-.card {
+/* portrait wrapper (polaroid frame) */
+.portrait-wrap {
+  width: min(92vw, 520px); /* narrower for polaroid feel */
   background: white;
-  padding: 20px;
-  margin: 20px auto;
-  border-radius: 20px;
-  max-width: 600px;
-  box-shadow: 0 10px 25px rgba(255,105,180,0.25);
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 28px rgba(255,105,180,0.35);
-}
-
-.card p {
-  display: none;
-  margin-top: 10px;
-}
-
-.card.open p {
-  display: block;
-}
-
-/* ===== POLAROID GALLERY (ADDED HERE) ===== */
-.gallery {
+  padding: 8px 8px 48px 8px; /* thin borders top/sides, thicker bottom for caption */
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
 }
 
-.gallery img {
-  width: 220px;
-  background: white;
-  padding: 12px 12px 35px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-  transition: transform 0.3s;
+/* container for portrait with aspect ratio */
+.portrait-container {
+  position: relative;
+  width: 100%;
 }
 
-.gallery img:hover {
+.portrait-container::before {
+  content: "";
+  display: block;
+  padding-top: var(--aspect-ratio, 133%); /* default; JS sets actual */
+}
+
+/* portrait text (enhanced with repo's technique: variables for filters, white-space for better fill) */
+#portrait{
+  position: absolute;
+  inset: 0;
+  font-family: var(--portrait-font-family); /* From repo */
+  font-size: var(--portrait-font-vw);
+  line-height: 0.95; /* Tighter for denser text, showing more image */
+  white-space: pre-wrap; /* From repo: allows better wrapping and fill */
+  background: url('bg.jpg') center center / cover no-repeat; /* Updated to cover from repo */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback from repo */
+  word-break: break-word;
+  text-align: center;
+  margin: 0;
+  overflow: hidden; /* hide excess text */
+  z-index: 1;
+  text-shadow: 0 0 2px rgba(255,255,255,0.3), 0 0 1px rgba(0,0,0,0.05); /* subtler for clarity */
+  filter: 
+    brightness(var(--portrait-brightness)) 
+    grayscale(var(--portrait-grayscale)) 
+    invert(var(--portrait-invert)) 
+    contrast(var(--portrait-contrast)) 
+    saturate(var(--portrait-saturate)); /* Combined repo filters + existing */
+}
+
+/* heart button (in polaroid bottom frame) */
+.heart-area{
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 6;
+}
+
+.press-label{
+  font-size:14px;
+  color:#b54677; /* match letter color for polaroid caption feel */
+  text-shadow: none;
+}
+
+#loveButton{
+  font-size:48px;
+  cursor:pointer;
+  background:none;
+  border:none;
+  outline:none;
+}
+
+/* confetti hearts */
+.heartConfetti{
+  position:fixed;
+  font-size:22px;
+  animation: explode 1.5s ease-out forwards;
+  z-index:8;
+  pointer-events:none;
+}
+@keyframes explode{
+  0%{ transform: translate(0,0) scale(1); opacity:1; }
+  100%{ transform: translate(var(--x), var(--y)) scale(0.55); opacity:0; }
+}
+
+/* responsiveness */
+@media (max-width:420px){
+  .message{ font-size:28px; top:12px; }
+  #loveButton{ font-size:36px; }
+  :root{ --portrait-font-vw: 2.4vw; } /* Increased for mobile */
+  .press-label{ font-size:12px; }
+  .portrait-wrap{ padding: 6px 6px 36px 6px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- intro letter -->
+<div id="envelope" aria-hidden="false">
+  <div class="letter" id="letterCard">
+    <h3>I've made something new to you mahal</h3>
+    <p>Clickto see it!</p>
+    <div class="seal">Tap to see it➤</div>
+  </div>
+</div>
+
+<!-- main scene -->
+<div id="main" aria-hidden="true">
+  <div class="message">Happy Valentines 💓 <span style="font-size:.6em; display:block">and Happy Monthsary 🌸</span></div>
+  <div class="cloud left"></div>
+  <div class="cloud right"></div>
+  <div class="portrait-wrap">
+    <div class="portrait-container">
+      <p id="portrait"></p>
+    </div>
+    <div class="heart-area">
+      <div class="press-label">Press it</div>
+      <button id="loveButton">🌸</button>
+    </div>
+  </div>
+</div>
+
+<audio id="bgMusic" src="paraluman.mp3" preload="auto"></audio>
+
+<script>
+const portraitEl = document.getElementById('portrait');
+const text = "I love youu mahal ko kiss ko bi Mwahh "; // Added space for better separation, like repo
+
+// Dynamic text repetition from repo technique (adjusts to screen size)
+function fillText() {
+  const repeatCount = Math.ceil((window.innerWidth * window.innerHeight) / 100); // Rough estimate; tweak /100 for density
+  portraitEl.innerText = text.repeat(repeatCount);
+}
+fillText();
+window.addEventListener('resize', fillText);
+
+/* set portrait aspect ratio dynamically */
+const portraitContainer = document.querySelector('.portrait-container');
+const img = new Image();
+img.src = 'bg.jpg';
+img.onload = function() {
+  const aspect = (this.height / this.width) * 100;
+  portraitContainer.style.setProperty('--aspect-ratio', aspect + '%');
+};
+
+/* fade in main scene on letter click */
+const envelope = document.getElementById('envelope');
+const main = document.getElementById('main');
+const letter = document.getElementById('letterCard');
+
+letter.addEventListener('click', () => {
+  envelope.style.display='none';
+  main.classList.add('visible');
+  main.setAttribute('aria-hidden','false');
+});
+
+/* petals (more, with variations) */
+function rand(min,max){ return Math.random()*(max-min)+min; }
+for(let i=0;i<50;i++){  // Increased from 36 to 50
+  const petal = document.createElement('div');
+  petal.className='petal';
+  petal.style.left=rand(0,100)+'vw';
+  if(Math.random()>0.5){
+    petal.style.setProperty('--startY','-12vh');
+    petal.style.top='-12vh';
+  } else {
+    petal.style.setProperty('--startY','95vh');
+    petal.style.top='95vh';
+  }
+  petal.style.setProperty('--sway', rand(15,60)+'px');
+  petal.style.animationDuration = rand(6,12)+'s';
+  petal.style.animationDelay = rand(0,6)+'s';
+  const size = rand(10,18);
+  petal.style.setProperty('--size', size + 'px');
+  const colors = ['#ffd1e2', '#ffc0df', '#ffb3e0', '#ff99d6'];  // Varied colors
+  petal.style.setProperty('--color-start', colors[Math.floor(rand(0, colors.length))]);
+  petal.style.setProperty('--color-end', colors[Math.floor(rand(0, colors.length))]);
+  document.body.appendChild(petal);
+}
+
+/* stars */
+for(let i=0;i<40;i++){
+  const star = document.createElement('div');
+  star.className='star';
+  star.style.left=rand(0,100)+'vw';
+  star.style.top=rand(0,100)+'vh';
+  star.style.animationDelay = rand(0,2)+'s';
+  document.body.appendChild(star);
+}
+
+/* heart button music + confetti */
+const music = document.getElementById('bgMusic');
+const loveBtn = document.getElementById('loveButton');
+
+function fadeInAudio(audio,duration=2500){
+  audio.volume=0;
+  const step=0.05;
+  const stepTime=duration*step/1.0;
+  const interval = setInterval(()=>{
+    if(audio.volume<0.99){ audio.volume=Math.min(1,audio.volume+step); }
+    else{ audio.volume=1; clearInterval(interval); }
+  },stepTime);
+}
+
+function createConfetti(x,y){
+  for(let i=0;i<28;i++){
+    const h=document.createElement('div');
+    h.className='heartConfetti';
+    h.innerText='🌸';
+    h.style.left=x+'px';
+    h.style.top=y+'px';
+    const vx=(Math.random()*600-300);
+    const vy=(Math.random()*-300-80);
+    h.style.setProperty('--x',vx+'px');
+    h.style.setProperty('--y',vy+'px');
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1600);
+  }
+}
+
+loveBtn.addEventListener('click',()=>{
+  music.currentTime=0;
+  const p=music.play();
+  if(p && typeof p.then==='function'){ p.then(()=>fadeInAudio(music,2200)).catch(()=>{}); }
+  const rect=loveBtn.getBoundingClientRect();
+  createConfetti(rect.left+rect.width/2, rect.top+rect.height/2);
+});
+</script>
+
+</body>
+</html>.gallery img:hover {
   transform: scale(1.05) rotate(-1deg);
 }
 
@@ -276,3 +588,4 @@ setInterval(createHeart, 300);
 </script>
 </body>
 </html>
+
